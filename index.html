@@ -1,59 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>scapyUI</title>
-<style>
-    /* פונט נקי ומודרני */
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Roboto', sans-serif;
-        background-color: #f5f5f5; /* צבע רקע רגוע */
-        color: #333; /* צבע טקסט נעים לקריאה */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 3em;
-        font-weight: 700;
-        margin-bottom: 0.3em;
-    }
-
-    p {
-        font-size: 1.2em;
-        margin-top: 0;
-        margin-bottom: 2em;
-        color: #555;
-    }
-
-    a.button {
-        text-decoration: none;
-        padding: 12px 25px;
-        background-color: #00bcd4; /* צבע כפתור רגוע */
-        color: white;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-
-    a.button:hover {
-        background-color: #0097a7; /* שינוי צבע קל בהובר */
-    }
-</style>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScapyUI | Packet crafting made intuitive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d79f5",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0a0b",
+                        "charcoal": "#121214",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(77, 121, 245, 0.5), 0 0 20px rgba(77, 121, 245, 0.2)
+        }
+        .hex-pattern {
+            background-color: #0a0a0b;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuArx1MngXc80aOcHT0eJu1luPALxiieZ08zWrEIYtC1I0F9nhx5jczTqscJ5l8Zv7HPjvYypsvQ_vceuGU_NWnZvDElaw3sTCkYIla8HYEUokHQV1uA7joCn5fVaIpc7UO4Ztx8Uakl3G0iRBAYxTA4uronUjvip1rokoUrKIChfM4arGqJLIm_sjOj7L176xsE-kiuJzIw6m4yrgD1VaCXflz_RnC5R9846RzgGtRC_y1q1VPIuvA2Yu7YQ5XH4A9s4vun2cf6z1Ff);
+            background-attachment: fixed
+        }
+        .packet-layer {
+            transition: transform 0.3s ease
+        }
+        .packet-layer:hover {
+            transform: translatey(-5px)
+        }
+    </style>
 </head>
-<body>
-    <h1>scapyUI</h1>
-    <p>A simple GUI for Scapy in Python – Coming Soon!</p>
-     <h1>Adiel Gallula</h1>
-    <a class="button" href="#">Learn More</a>
-</body>
-</html>
+<body class="bg-background-dark font-display text-slate-100 selection:bg-primary/30">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden hex-pattern">
+<header class="sticky top-0 z-50 w-full border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="flex h-8 w-8 items-center justify-center rounded bg-primary shadow-[0_0_15px_rgba(77,121,245,0.4)]">
+<span class="material-symbols-outlined text-white text-xl">account_tree</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-white">ScapyUI</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors" href="#">Features</a>
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors" href="#">Docs</a>
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors" href="#">Download</a>
+<div class="h-4 w-[1px] bg-white/10"></div>
+<a class="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-1.5 text-sm font-bold text-white hover:bg-white/10 transition-all border border-white/10" href="#">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span>GitHub</span>
+</a>
+</nav>
+<div class="md:hidden">
+<span class="material-symbols-outlined text-white">menu</span>
+</div>
+</div>
+</header>
+<section class="relative flex flex-col items-center justify-center px-6 pt-20 pb-32 text-center">
+<div class="absolute top-1/4 left-1/2 -z-10 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]"></div>
+<div class="max-w-4xl space-y-8">
+<div class="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+                    Version 2.0 Now Available
+                </div>
+<h1 class="neon-glow text-6xl font-black tracking-tighter text-white sm:text-8xl">
+                    ScapyUI
+                </h1>
+<p class="mx-auto max-w-2xl text-lg font-normal text-slate-400 sm:text-xl leading-relaxed">
+                    The modern interface for low-level network engineering. Craft, analyze, and automate packets with a professional visual toolkit.
+                </p>
+<div class="relative py-12 flex flex-col items-center">
+<div class="w-full max-w-md space-y-2 perspective-1000">
+<div class="packet-layer flex items-center justify-between rounded-lg border border-primary/40 bg-primary/5 p-4 shadow-[0_0_20px_rgba(77,121,245,0.1)]">
+<span class="text-xs font-mono text-primary/80 uppercase">Transport</span>
+<span class="font-bold text-primary">TCP Layer</span>
+<span class="material-symbols-outlined text-primary text-sm">lock</span>
+</div>
+<div class="packet-layer flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 p-4 opacity-80">
+<span class="text-xs font-mono text-primary/60 uppercase">Network</span>
+<span class="font-bold text-primary/80">IPv4 Header</span>
+<span class="material-symbols-outlined text-primary/80 text-sm">router</span>
+</div>
+<div class="packet-layer flex items-center justify-between rounded-lg border border-primary/20 bg-primary/5 p-4 opacity-60">
+<span class="text-xs font-mono text-primary/40 uppercase">Datalink</span>
+<span class="font-bold text-primary/60">Ethernet II</span>
+<span class="material-symbols-outlined text-primary/60 text-sm">lan</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto flex min-w-[180px] cursor-pointer items-center justify-center rounded-lg bg-primary h-12 px-8 text-white text-base font-bold shadow-[0_0_20px_rgba(77,121,245,0.3)] hover:scale-105 transition-all">
+                        Download Now
+                    </button>
+<button class="w-full sm:w-auto flex min-w-[180px] cursor-pointer items-center justify-center rounded-lg bg-white/5 border border-white/10 h-12 px-8 text-white text-base font-bold hover:bg-white/10 transition-all">
+                        View Documentation
+                    </button>
+</div>
+</div>
+</section>
+<section class="w-full bg-charcoal/95 border-y border-white/5 py-24">
+<div class="mx-auto max-w-7xl px-6">
+<div class="mb-16 space-y-4">
+<h2 class="text-3xl font-black tracking-tight text-white sm:text-4xl">
+                        Advanced Capabilities
+                    </h2>
+<p class="max-w-2xl text-slate-300">
+                        Engineered for security professionals and network developers. Get the power of Scapy with the speed of a modern workspace.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="group flex flex-col gap-6 rounded-xl border border-white/10 bg-white/[0.03] p-8 hover:border-primary/50 hover:bg-white/[0.05] transition-all">
+<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:shadow-[0_0_15px_rgba(77,121,245,0.3)] transition-all">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<div class="space-y-2">
+<h3 class="text-lg font-bold text-white">Visual Packet Builder</h3>
+<p class="text-sm leading-relaxed text-slate-300">
+                                Construct complex headers with drag-and-drop ease. Define fields, calculate checksums automatically, and preview byte streams in real-time.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col gap-6 rounded-xl border border-white/10 bg-white/[0.03] p-8 hover:border-primary/50 hover:bg-white/[0.05] transition-all">
+<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:shadow-[0_0_15px_rgba(77,121,245,0.3)] transition-all">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+<div class="space-y-2">
+<h3 class="text-lg font-bold text-white">Real-time Analysis</h3>
+<p class="text-sm leading-relaxed text-slate-300">
+                                Intercept and decode traffic with instant feedback. Use powerful filtering to isolate anomalies and investigate malicious patterns.
+                            </p>
+</div>
+</div>
+<div class="group flex flex-col gap-6 rounded-xl border border-white/10 bg-white/[0.03] p-8 hover:border-primary/50 hover:bg-white/[0.05] transition-all">
+<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:shadow-[0_0_15px_rgba(77,121,245,0.3)] transition-all">
+<span class="material-symbols-outlined">code_blocks</span>
+</div>
+<div class="space-y-2">
+<h3 class="text-lg font-bold text-white">Python Integration</h3>
+<p class="text-sm leading-relaxed text-slate-300">
+                                Seamlessly export your UI-built packets to Scapy scripts. Bridge the gap between prototype and automated production scripts.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full bg-charcoal/95 py-24">
+<div class="mx-auto max-w-7xl px-6">
+<div class="relative overflow-hidden rounded-2xl bg-white/[0.03] border border-white/10 px-8 py-20 text-center">
+<div class="relative z-10 space-y-6">
+<h2 class="text-4xl font-black text-white">Ready to start crafting?</h2>
+<p class="mx-auto max-w-lg text-slate-300">
+                            Join the developers using ScapyUI for modern network analysis and security auditing.
+                        </p>
+<div class="flex justify-center">
+<button class="flex min-w-[200px] items-center justify-center rounded-lg bg-primary h-12 px-8 text-white text-base font-bold shadow-[0_0_20px_rgba(77,121,245,0.4)] hover:scale-105 transition-all">
+                                Get Started for Free
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class="mt-auto bg-charcoal border-t border-white/5 py-16">
+<div class="mx-auto max-w-7xl px-6">
+<div class="flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex items-center gap-3">
+<div class="flex h-6 w-6 items-center justify-center rounded bg-primary/80">
+<span class="material-symbols-outlined text-white text-sm">account_tree</span>
+</div>
+<span class="text-lg font-bold text-white">ScapyUI</span>
+</div>
+<div class="flex flex-wrap justify-center gap-8 text-sm font-medium text-slate-400">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">License</a>
+<a class="hover:text-white transition-colors" href="#">Documentation</a>
+<a class="hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">hub</span>
+</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+</div>
+<div class="mt-10 pt-8 border-t border-white/5 text-center text-sm text-slate-500">
+                    © 2024 ScapyUI Project. Built for the modern web.
+                </div>
+</div>
+</footer>
+</div>
+
+</body></html>
