@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://scapyui.com/sitemap.xml
